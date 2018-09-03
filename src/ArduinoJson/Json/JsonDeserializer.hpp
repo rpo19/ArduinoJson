@@ -18,9 +18,9 @@ namespace Internals {
 template <typename TReader, typename TStringStorage>
 class JsonDeserializer {
  public:
-  JsonDeserializer(MemoryPool *memoryPool, TReader reader,
+  JsonDeserializer(MemoryPool &memoryPool, TReader reader,
                    TStringStorage stringStorage, uint8_t nestingLimit)
-      : _memoryPool(memoryPool),
+      : _memoryPool(&memoryPool),
         _reader(reader),
         _stringStorage(stringStorage),
         _nestingLimit(nestingLimit),

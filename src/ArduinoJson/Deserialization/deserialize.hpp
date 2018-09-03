@@ -17,7 +17,7 @@ namespace Internals {
 
 template <template <typename, typename> class TDeserializer,
           typename TMemoryPool, typename TReader, typename TWriter>
-TDeserializer<TReader, TWriter> makeDeserializer(TMemoryPool *memoryPool,
+TDeserializer<TReader, TWriter> makeDeserializer(TMemoryPool &memoryPool,
                                                  TReader reader, TWriter writer,
                                                  uint8_t nestingLimit) {
   return TDeserializer<TReader, TWriter>(memoryPool, reader, writer,
@@ -34,7 +34,7 @@ typename Internals::enable_if<!Internals::is_array<TString>::value,
 deserialize(TDocument &doc, const TString &input) {
   using namespace Internals;
   return makeDeserializer<TDeserializer>(
-             &doc.memoryPool(), makeReader(input),
+             doc.memoryPool(), makeReader(input),
              makeStringStorage(doc.memoryPool(), input), doc.nestingLimit)
       .parse(doc.template to<JsonVariantData>());
 }
@@ -47,7 +47,7 @@ template <template <typename, typename> class TDeserializer, typename TDocument,
 DeserializationError deserialize(TDocument &doc, TChar *input) {
   using namespace Internals;
   return makeDeserializer<TDeserializer>(
-             &doc.memoryPool(), makeReader(input),
+             doc.memoryPool(), makeReader(input),
              makeStringStorage(doc.memoryPool(), input), doc.nestingLimit)
       .parse(doc.template to<JsonVariantData>());
 }
@@ -62,7 +62,7 @@ DeserializationError deserialize(TDocument &doc, TChar *input,
                                  size_t inputSize) {
   using namespace Internals;
   return makeDeserializer<TDeserializer>(
-             &doc.memoryPool(), makeReader(input, inputSize),
+             doc.memoryPool(), makeReader(input, inputSize),
              makeStringStorage(doc.memoryPool(), input), doc.nestingLimit)
       .parse(doc.template to<JsonVariantData>());
 }
@@ -75,7 +75,7 @@ template <template <typename, typename> class TDeserializer, typename TDocument,
 DeserializationError deserialize(TDocument &doc, TStream &input) {
   using namespace Internals;
   return makeDeserializer<TDeserializer>(
-             &doc.memoryPool(), makeReader(input),
+             doc.memoryPool(), makeReader(input),
              makeStringStorage(doc.memoryPool(), input), doc.nestingLimit)
       .parse(doc.template to<JsonVariantData>());
 }
