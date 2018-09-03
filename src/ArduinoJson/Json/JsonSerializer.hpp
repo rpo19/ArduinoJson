@@ -97,9 +97,10 @@ size_t serializeJson(const TSource &source, TDestination &destination) {
 }
 
 template <typename TSource>
-size_t serializeJson(const TSource &source, char *buffer, size_t bufferSize) {
+size_t serializeJson(const TSource &source, char *memoryPool,
+                     size_t memoryPoolSize) {
   using namespace Internals;
-  return serialize<JsonSerializer>(source, buffer, bufferSize);
+  return serialize<JsonSerializer>(source, memoryPool, memoryPoolSize);
 }
 
 template <typename TSource>

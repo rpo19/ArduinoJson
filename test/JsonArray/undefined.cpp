@@ -28,8 +28,8 @@ TEST_CASE("Undefined JsonArray") {
   }
 
   SECTION("PrintToWritesBrackets") {
-    char buffer[32];
-    serializeJson(array, buffer, sizeof(buffer));
-    REQUIRE_THAT(buffer, Equals("null"));
+    char memoryPool[32];
+    serializeJson(array, memoryPool, sizeof(memoryPool));
+    REQUIRE_THAT(memoryPool, Equals("null"));
   }
 }

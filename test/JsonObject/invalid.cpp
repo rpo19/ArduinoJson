@@ -28,8 +28,8 @@ TEST_CASE("JsonObject::invalid()") {
   }
 
   SECTION("serialize to 'null'") {
-    char buffer[32];
-    serializeJson(obj, buffer, sizeof(buffer));
-    REQUIRE_THAT(buffer, Equals("null"));
+    char memoryPool[32];
+    serializeJson(obj, memoryPool, sizeof(memoryPool));
+    REQUIRE_THAT(memoryPool, Equals("null"));
   }
 }

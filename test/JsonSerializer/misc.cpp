@@ -6,9 +6,9 @@ template <typename T>
 void check(T value, const std::string &expected) {
   DynamicJsonDocument doc;
   doc.to<JsonVariant>().set(value);
-  char buffer[256] = "";
-  size_t returnValue = serializeJson(doc, buffer, sizeof(buffer));
-  REQUIRE(expected == buffer);
+  char memoryPool[256] = "";
+  size_t returnValue = serializeJson(doc, memoryPool, sizeof(memoryPool));
+  REQUIRE(expected == memoryPool);
   REQUIRE(expected.size() == returnValue);
 }
 

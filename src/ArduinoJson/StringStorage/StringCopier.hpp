@@ -7,19 +7,19 @@
 namespace ArduinoJson {
 namespace Internals {
 
-template <typename TJsonBuffer>
+template <typename TMemoryPool>
 class StringCopier {
  public:
-  StringCopier(TJsonBuffer& jb) : _jb(&jb) {}
+  StringCopier(TMemoryPool& jb) : _jb(&jb) {}
 
-  typedef typename TJsonBuffer::String String;
+  typedef typename TMemoryPool::String String;
 
   String startString() {
     return _jb->startString();
   }
 
  private:
-  TJsonBuffer* _jb;
+  TMemoryPool* _jb;
 };
 }  // namespace Internals
 }  // namespace ArduinoJson

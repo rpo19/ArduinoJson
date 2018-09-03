@@ -101,8 +101,8 @@ class JsonWriter {
 
   template <typename UInt>
   void writeInteger(UInt value) {
-    char buffer[22];
-    char *end = buffer + sizeof(buffer);
+    char memoryPool[22];
+    char *end = memoryPool + sizeof(memoryPool);
     char *begin = end;
 
     // write the string in reverse order
@@ -116,9 +116,9 @@ class JsonWriter {
   }
 
   void writeDecimals(uint32_t value, int8_t width) {
-    // buffer should be big enough for all digits and the dot
-    char buffer[16];
-    char *end = buffer + sizeof(buffer);
+    // memoryPool should be big enough for all digits and the dot
+    char memoryPool[16];
+    char *end = memoryPool + sizeof(memoryPool);
     char *begin = end;
 
     // write the string in reverse order

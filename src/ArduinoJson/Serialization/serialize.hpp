@@ -32,14 +32,15 @@ size_t serialize(const TSource &source, std::ostream &os) {
 #endif
 
 template <template <typename> class TSerializer, typename TSource>
-size_t serialize(const TSource &source, char *buffer, size_t bufferSize) {
-  StaticStringWriter writer(buffer, bufferSize);
+size_t serialize(const TSource &source, char *memoryPool,
+                 size_t memoryPoolSize) {
+  StaticStringWriter writer(memoryPool, memoryPoolSize);
   return serialize<TSerializer>(source, writer);
 }
 
 template <template <typename> class TSerializer, typename TSource, size_t N>
-size_t serialize(const TSource &source, char (&buffer)[N]) {
-  StaticStringWriter writer(buffer, N);
+size_t serialize(const TSource &source, char (&memoryPool)[N]) {
+  StaticStringWriter writer(memoryPool, N);
   return serialize<TSerializer>(source, writer);
 }
 
