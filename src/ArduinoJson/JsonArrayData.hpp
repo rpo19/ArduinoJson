@@ -6,7 +6,7 @@
 
 #include "Data/JsonVariantData.hpp"
 #include "Data/List.hpp"
-#include "Memory/MemoryPoolMixin.hpp"
+#include "Memory/AllocableInMemoryPool.hpp"
 #include "Polyfills/type_traits.hpp"
 
 // Returns the size (in bytes) of an array with n elements.
@@ -18,7 +18,7 @@
 
 namespace ArduinoJson {
 namespace Internals {
-struct JsonArrayData : List<JsonVariantData>, MemoryPoolMixin {
+struct JsonArrayData : List<JsonVariantData>, AllocableInMemoryPool {
   JsonVariantData* addSlot(MemoryPool* memoryPool) {
     iterator it = add(memoryPool);
     return it != end() ? &*it : 0;

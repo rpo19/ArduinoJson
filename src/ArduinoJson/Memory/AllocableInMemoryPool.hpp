@@ -9,7 +9,7 @@
 namespace ArduinoJson {
 namespace Internals {
 
-class MemoryPoolMixin {
+class AllocableInMemoryPool {
  public:
   void *operator new(size_t n, MemoryPool *memoryPool) NOEXCEPT {
     if (!memoryPool) return NULL;
